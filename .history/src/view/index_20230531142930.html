@@ -1,0 +1,102 @@
+<!-- <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>NodeJS</h1>
+    <h1 id="data"></h1>
+    <h1>Top is test data </h1>
+    <script src="index.js" type="module"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      
+      axios
+        .get("http://localhost:8080/api/user/getUser", {
+          params: {
+            ID: 3,
+          },
+        })
+        .then((result) =>
+          result.data.map((item) => {
+            document.querySelector("#data").innerHTML += `${item.user_id}   ${item.full_name} ${item.email}   <br/>`;
+
+          })
+        )
+        .catch(function (error) {
+          console.log(error);
+        })
+        .finally(function () {
+        });
+    </script>
+  </body>
+</html> -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h3>show data</h3>
+    <button id="showuser">Show all user</button>
+    <!-- <label for="site-search">Search the site:</label> -->
+<input type="search" id="searchuser" name="q">
+
+<button id="user1">user 1</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+    <h3>Top is test data</h3>
+    <script src="index.js" type="module"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      let showUser = document.getElementById("showuser");
+      console.log(showuser);
+      showUser.addEventListener("click", () => {
+        axios
+          .get("http://localhost:8080/api/user/getUser", {
+            params: {
+              ID: 3,
+            },
+          })
+          .then((result) => {
+            var dataContainer = document.querySelector("#data");
+            result.data.forEach((item) => {
+              var row = document.createElement("tr");
+              row.innerHTML = `<td>${item.user_id}</td><td>${item.full_name}</td><td>${item.email}</td>`;
+              dataContainer.appendChild(row);
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+      });
+      //show user id
+      // searchuser
+      let user1 = document.getElementById('user1');
+      user1.addEventListener('click',()=>{
+        
+      } )
+    </script>
+  </body>
+</html>
